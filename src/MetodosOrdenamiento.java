@@ -2,8 +2,6 @@ import java.util.Scanner;
 import java.util.Arrays;
 public class MetodosOrdenamiento{
     private int[] arreglo;
-
-    //CREACION ARREGLO
     public void arregloPrincipal(){
         Scanner leer = new Scanner(System.in);
         int tamanio = leerEnteroValido(leer, "Ingrese el tamaño del arreglo: ", false);
@@ -12,11 +10,7 @@ public class MetodosOrdenamiento{
         for(int i = 0; i < tamanio; i++){
             arreglo[i] = leerEnteroValido(leer, "Valor en la posición " + i, true);
         }
-        System.out.print("Arreglo ingresado: [");
-        for(int i : arreglo){
-            System.out.print(" " + i);
-        }
-        System.out.println(" ]");
+        System.out.println("Arreglo ingresado: " + Arrays.toString(arreglo));
     }
 
     public int[] getArreglo() {
@@ -132,6 +126,7 @@ public class MetodosOrdenamiento{
     public void sortBySeleccion(int[] arregloCopia, boolean ascendente, boolean logs) { 
         int tamanio = arregloCopia.length;
         for(int i = 0; i < tamanio; i++){
+            System.out.println("Iteracion número " + (i + 1));
             int indice = i;
             for(int j = i + 1; j < tamanio; j++){
                 if (ascendente? arregloCopia[j] < arregloCopia[indice] : arregloCopia[j] > arregloCopia[indice]){
@@ -154,18 +149,18 @@ public class MetodosOrdenamiento{
         int tamanio = arregloCopia.length;
         if(logs){
             for(int i = 1; i < tamanio; i++){
-                System.out.println("Iteracion numero " + i);
+                System.out.println("Iteracion número " + i);
                 int aux = arregloCopia[i];
                 int j = i - 1;
-                System.out.println("\ti=" + i + " j=" + j + " [i]=" + arregloCopia[i] + " [j]=" + arregloCopia[j]);
+                System.out.println("i=" + i + " j=" + j + " [i]=" + arregloCopia[i] + " [j]=" + arregloCopia[j]);
                 while(j >= 0 && (ascendente? arregloCopia[j] > aux  : arregloCopia[j] < aux)){
-                    System.out.println("\t\tComparamos " + aux + " con " + arregloCopia[j]);
+                    System.out.println("Comparamos " + aux + " con " + arregloCopia[j]);
                     arregloCopia [j + 1] = arregloCopia[j];
                     j--;
-                    System.out.println("\t\t--------" + Arrays.toString(arregloCopia));
+                    System.out.println( Arrays.toString(arregloCopia));
                 }
                 arregloCopia[j+1] = aux;
-                System.out.println("\t--------" + Arrays.toString(arregloCopia));
+                System.out.println(Arrays.toString(arregloCopia));
                 }
         } else {
             for(int i = 1; i < tamanio; i++){
@@ -183,11 +178,10 @@ public class MetodosOrdenamiento{
     //BURBUJA AVANZADO
     public void sortBubbleAvanzado(int[] arregloCopia, boolean ascendente, boolean logs) {
         int tamanio = arregloCopia.length;
-        boolean intercambio = false;
         if(logs){
             for(int i = 0; i < tamanio; i++){
-                intercambio = false;
-                System.out.println("Pasada: " + i);
+                boolean intercambio = false;
+                System.out.println("Iteración: " + (i+1));
                 for(int j = 0; j < tamanio - 1 - i; j++){
                     System.out.println("j= " + j +" [j]=" + arregloCopia[j] + 
                     " j+1= " + j+1 +" [j+1]=" + arregloCopia[j+1]);
@@ -198,14 +192,16 @@ public class MetodosOrdenamiento{
                         arregloCopia[j + 1] = aux;
                         intercambio = true;
                     } 
+                    System.out.println( Arrays.toString(arregloCopia));
                 if(!intercambio){
+                    System.out.println("No hubo cambio");
                     break;
                 }
                 }          
             }
         } else {
             for(int i = 0; i < tamanio; i++){
-                intercambio = false;
+                boolean intercambio = false;
                 for(int j = 0; j < tamanio - 1 - i; j++){
                     if(ascendente? arregloCopia[j] > arregloCopia[j + 1] : arregloCopia[j] < arregloCopia[j + 1]){
                         int aux = arregloCopia[j];
@@ -213,10 +209,10 @@ public class MetodosOrdenamiento{
                         arregloCopia[j + 1] = aux;
                         intercambio = true;
                     } 
-                if(!intercambio){
-                    break;
                 }
-                }          
+                if(!intercambio){
+                    break;   
+                }       
             }
         }
     }  
